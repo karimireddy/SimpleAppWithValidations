@@ -1,9 +1,9 @@
 package com.sampleapp.service;
 
-import com.sampleapp.entity.Employee;
+import com.sampleapp.dto.EmployeeDto;
 
 public interface EmployeeService {
 
-	public String addEmployee(Employee emp);
+	public String addEmployee(EmployeeDto emp);
 
 }
