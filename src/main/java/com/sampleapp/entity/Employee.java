@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.sampleapp.enums.Roles;
 
+
 public class Employee {
 
 	private String fName;
