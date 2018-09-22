@@ -1,5 +1,6 @@
 package com.sampleapp.controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,7 +11,7 @@ import com.sampleapp.dto.EmployeeDto;
 @RestController
 public class EmployeeController {
 
-	@RequestMapping(value = "/get", method = RequestMethod.GET)
+	@GetMapping("/get")
 	public String get() {
 		return "Hello World from Rest Controller";
 	}
