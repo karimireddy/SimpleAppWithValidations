@@ -26,4 +26,7 @@ hs_err_pid*
 *.DS_Store
 *.project
 *.settings
-target/*
+*/target/*
+*/target/**
+*.properties
+target/classes/META-INF/maven/com.sampleapp/demo/pom.xml
