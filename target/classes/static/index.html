@@ -34,16 +34,18 @@ form{
 </head>
 
 <body>
+
+  <h5 id="successMessage" style="color:green"></h5>
   <h5 id="errorMessage" style="color:red;"></h5>
   <div class="form">
 
 
-      <input type="text" id="fName" name="firstName" placeholder="First Name" value=""><br>
-      <input type="text" id="mName" name="middleName" placeholder="Middle Name" value=""><br>
-      <input type="text" id="lName" name="lastName" placeholder="Last Name" value=""><br>
-      <input type="text" id="email" name="email" placeholder="Email" value=""><br>
-      <input type="date" id="DOB" name="dateOfBirth" value=""/><br>
-      <select id="role" name="role" >
+      <input type="text" id="fName" name="firstName" placeholder="First Name" value="" onfocus="clear()"><br>
+      <input type="text" id="mName" name="middleName" placeholder="Middle Name" value="" onfocus="clear()"><br>
+      <input type="text" id="lName" name="lastName" placeholder="Last Name" value="" onfocus="clear()"><br>
+      <input type="text" id="email" name="email" placeholder="Email" value="" onfocus="clear()"><br>
+      <input type="date" id="DOB" name="dateOfBirth" value="" onfocus="clear()"/><br>
+      <select id="role" name="role" onfocus="clear()">
         <option value="SOFTWARE_ENGINEER">SOFTWARE ENGINEER</option>
         <option value="SENIOR_SOFTWARE_ENGINEER">SENIOR SOFTWARE ENGINEER</option>
         <option value="TEAM_LEAD">TEAM LEAD</option>
@@ -55,7 +57,15 @@ form{
 
   <script>
 
+  function clear(){
+    document.getElementById('successMessage').innerHTML =" ";
+    document.getElementById('errorMessage').innerHTML =" ";
+  }
+
   function myFunction(){
+
+    document.getElementById('successMessage').innerHTML =" ";
+    document.getElementById('errorMessage').innerHTML =" ";
 
     var fName = document.getElementById('fName');
     var mName = document.getElementById('mName');
@@ -63,13 +73,12 @@ form{
     var email = document.getElementById('email');
     var DOB = document.getElementById('DOB');
     var role = document.getElementById('role');
-    console.log(fName.value);
-    console.log(mName.value);
-    console.log(lName.value);
-    console.log(email.value);
-    console.log(DOB.value);
-    console.log(role.value);
-
+    // console.log(fName.value);
+    // console.log(mName.value);
+    // console.log(lName.value);
+    // console.log(email.value);
+    // console.log(DOB.value);
+    // console.log(role.value);
 
       var xhr = new XMLHttpRequest();
       xhr.open("POST", "/addEmployee", true);
@@ -86,14 +95,16 @@ form{
         // console.log("HELLO")
         // console.log(this.responseText);
         // console.log("HELLO");
+        console.log(xhr.status);
+        if(xhr.status==400){
         var data = JSON.parse(this.responseText);
-        if(data.status == 400){
         console.log(data.errors[0].defaultMessage);
-        document.getElementById('errorMessage').innerHTML = data.errors[3].defaultMessage;
-
-      }
+        document.getElementById('errorMessage').innerHTML = data.errors[0].defaultMessage;
+    }else {
+        document.getElementById('successMessage').innerHTML = "Employee has been added successfully";
       }
     }
+  }
   </script>
 
 </div>
