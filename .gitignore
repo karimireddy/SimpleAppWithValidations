@@ -30,3 +30,5 @@ hs_err_pid*
 */target/**
 *.properties
 target/classes/META-INF/maven/com.sampleapp/demo/pom.xml
+target/classes/META-INF/maven/com.sampleapp/demo/pom.properties
+target/classes/static/index.html

@@ -1,1 +1,101 @@
-Hello World!
+<!DOCTYPE html>
+<html>
+<head>
+<title>Registration Form</title>
+
+<style>
+input[type=text] {
+
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    background-color: #ecffb3;
+}
+input[type=submit]{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+form{
+  width:40%;
+  margin:0 auto;
+
+}
+
+</style>
+
+
+</head>
+
+<body>
+  <h5 id="errorMessage" style="color:red;"></h5>
+  <div class="form">
+
+
+      <input type="text" id="fName" name="firstName" placeholder="First Name" value=""><br>
+      <input type="text" id="mName" name="middleName" placeholder="Middle Name" value=""><br>
+      <input type="text" id="lName" name="lastName" placeholder="Last Name" value=""><br>
+      <input type="text" id="email" name="email" placeholder="Email" value=""><br>
+      <input type="date" id="DOB" name="dateOfBirth" value=""/><br>
+      <select id="role" name="role" >
+        <option value="SOFTWARE_ENGINEER">SOFTWARE ENGINEER</option>
+        <option value="SENIOR_SOFTWARE_ENGINEER">SENIOR SOFTWARE ENGINEER</option>
+        <option value="TEAM_LEAD">TEAM LEAD</option>
+        <option value="ARCHITECT">ARCHITECT</option>
+        <option value="MANAGER">MANAGER</option>
+      </select><br>
+      <input type="submit" value="Submit" onclick="myFunction()">
+    </div>
+
+  <script>
+
+  function myFunction(){
+
+    var fName = document.getElementById('fName');
+    var mName = document.getElementById('mName');
+    var lName = document.getElementById('lName');
+    var email = document.getElementById('email');
+    var DOB = document.getElementById('DOB');
+    var role = document.getElementById('role');
+    console.log(fName.value);
+    console.log(mName.value);
+    console.log(lName.value);
+    console.log(email.value);
+    console.log(DOB.value);
+    console.log(role.value);
+
+
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "/addEmployee", true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(JSON.stringify({
+        'fName':fName.value,
+        'mName':mName.value,
+        'lName':lName.value,
+        'email':email.value,
+        'dOB':DOB.value,
+        'role':role.value
+      }));
+      xhr.onload = function() {
+        // console.log("HELLO")
+        // console.log(this.responseText);
+        // console.log("HELLO");
+        var data = JSON.parse(this.responseText);
+        if(data.status == 400){
+        console.log(data.errors[0].defaultMessage);
+        document.getElementById('errorMessage').innerHTML = data.errors[3].defaultMessage;
+
+      }
+      }
+    }
+  </script>
+
+</div>
+</body>
+</html>

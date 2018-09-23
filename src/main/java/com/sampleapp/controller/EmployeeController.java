@@ -1,5 +1,7 @@
 package com.sampleapp.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +23,7 @@ public class EmployeeController {
 	}
 
 	@PostMapping("/addEmployee")
-	public String get(@RequestBody EmployeeDto dto) {
+	public String get(@RequestBody @Valid EmployeeDto dto) {
 
 		service.addEmployee(dto);
 

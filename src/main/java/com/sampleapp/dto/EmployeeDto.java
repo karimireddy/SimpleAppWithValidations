@@ -1,5 +1,7 @@
 package com.sampleapp.dto;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.validation.constraints.Email;
@@ -26,12 +28,23 @@ public class EmployeeDto {
 	private String email;
 
 	@NotNull(message = "Role cannot be null")
-	@NotBlank(message = "Role cannot be blank")
 	private Roles role;
 
 	@NotNull(message = "DateOfBirth cannot be null")
 	@NotBlank(message = "DateOfBirth cannot be blank")
+	private String dOB;
+	
 	private Date DOB;
+	
+	
+
+	public String getdOB() {
+		return dOB;
+	}
+
+	public void setdOB(String dOB) {
+		this.dOB = dOB;
+	}
 
 	public String getfName() {
 		return fName;
@@ -74,17 +87,19 @@ public class EmployeeDto {
 	}
 
 	public Date getDOB() {
-		return DOB;
-	}
-
-	public void setDOB(Date dOB) {
-		DOB = dOB;
+		try {
+		 return new SimpleDateFormat("yyyy-MM-dd").parse(dOB);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
 	public String toString() {
 		return "EmployeeDto [fName=" + fName + ", mName=" + mName + ", lName=" + lName + ", email=" + email + ", role="
-				+ role + ", DOB=" + DOB + "]";
+				+ role + ", DOB= ]";
 	}
 
 }
