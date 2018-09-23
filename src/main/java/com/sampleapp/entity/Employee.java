@@ -2,9 +2,11 @@ package com.sampleapp.entity;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+
 import com.sampleapp.enums.Roles;
 
-
+@Entity
 public class Employee {
 
 	private String fName;

@@ -1,0 +1,11 @@
+-------------------------------------------------------------------------------
+Test set: com.sampleapp.demo.DemoApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 2.57 s <<< FAILURE! - in com.sampleapp.demo.DemoApplicationTests
+contextLoads(com.sampleapp.demo.DemoApplicationTests)  Time elapsed: 0.009 s  <<< ERROR!
+java.lang.IllegalStateException: Failed to load ApplicationContext
+Caused by: java.lang.IllegalStateException: Error processing condition on org.springframework.boot.autoconfigure.context.PropertyPlaceholderAutoConfiguration.propertySourcesPlaceholderConfigurer
+Caused by: java.lang.IllegalStateException: Failed to introspect Class [com.sampleapp.config.AppConfig] from ClassLoader [sun.misc.Launcher$AppClassLoader@4aa298b7]
+Caused by: java.lang.NoClassDefFoundError: org/hibernate/SessionFactory
+Caused by: java.lang.ClassNotFoundException: org.hibernate.SessionFactory
+
