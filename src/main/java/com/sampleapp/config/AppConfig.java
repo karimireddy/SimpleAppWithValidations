@@ -1,5 +1,6 @@
 package com.sampleapp.config;
 
+import java.beans.PropertyVetoException;
 import java.util.Properties;
 
 import javax.sql.DataSource;
@@ -13,10 +14,11 @@ import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 @Configuration
-@EnableWebMvc
+//@EnableWebMvc
 @ComponentScan(basePackages = "com.simpleapp")
 @EnableTransactionManagement
 public class AppConfig {
@@ -50,5 +52,35 @@ public class AppConfig {
 				env.getProperty("hibernate.enable_lazy_load_no_trans"));
 		return properties;
 	}
+	
+	
+	@Bean
+	public DataSource securityDataSource() {
+
+		ComboPooledDataSource securityDataSource = new ComboPooledDataSource();
+
+		try {
+			securityDataSource.setDriverClass(env.getProperty("jdbc.driver"));
+		} catch (PropertyVetoException exc) {
+			throw new RuntimeException(exc);
+		}
+
+		securityDataSource.setJdbcUrl(env.getProperty("jdbc.url"));
+		securityDataSource.setUser(env.getProperty("jdbc.user"));
+		securityDataSource.setPassword(env.getProperty("jdbc.password"));
+
+		securityDataSource.setInitialPoolSize(getIntProperty("connection.pool.initialPoolSize"));
+		securityDataSource.setMinPoolSize(getIntProperty("connection.pool.minPoolSize"));
+		securityDataSource.setMaxPoolSize(getIntProperty("connection.pool.maxPoolSize"));
+		securityDataSource.setMaxIdleTime(getIntProperty("connection.pool.maxIdleTime"));
+
+		return securityDataSource;
+	}
+
+	private int getIntProperty(String propName) {
+		String propVal = env.getProperty(propName);
+		return Integer.parseInt(propVal);
+	}
+
 
 }
